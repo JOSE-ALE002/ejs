@@ -1,14 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 const connect = async () => {
 
-    const user = 'Jose_27';
-    const dbname = "veterinaria"
-    const password = '3bFXnrg5CyXOX3qN';
-    const uri = `mongodb+srv://${user}:${password}@cluster0.tc0kn.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+    const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.tc0kn.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
     
 
     try {
@@ -25,7 +24,7 @@ const connect = async () => {
 
 
 connect();
-const port = process.env.PORT || 3000;
+
 
 
 // MIDLEWARES
