@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     // SOLUCION # 2 - HECHO CON FETCH
     $(document).on("click", ".delete-peet", async function () {
-        const btnDelete = $(this)[0];        
+        const btnDelete = $(this)[0];
         const id = btnDelete.dataset.id;
 
         try {
@@ -30,14 +30,46 @@ $(document).ready(function () {
                 method: "delete",
             });
             const resp = await data.json();
-            
+
             if (resp.estado) {
-                window.location.href = "/mascotas"
+                window.location.href = "/mascotas";
             } else {
                 console.log(resp);
-            }            
+            }
         } catch (error) {
             console.log("Ha ocurrido un error", error);
-        }       
+        }
     });
-}); 
+
+    $("#peetForm_edit").submit(async function (e) {
+        e.preventDefault();
+
+        const id = $("#idMascota").val();
+        const nombre = $("#nombre").val();
+        const descripcion = $("#description").val();
+
+        try {
+            const data = await fetch(`/mascotas/${id}`, {
+                method: "put",
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({
+                   nombre, 
+                   descripcion
+                })
+            });
+
+            const resp = await data.json();
+        if(resp.estado) {            
+            window.location.href = "/mascotas";            
+
+        } else {
+            console.log(resp);
+        }
+        } catch (error) {
+            console.log("Ha ocurrido un error", error);
+        }
+    });
+});

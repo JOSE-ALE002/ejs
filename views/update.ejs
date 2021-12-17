@@ -8,27 +8,23 @@
 <% } else { %>
 <div class="container w-50 mx-auto mt-4">
     <h1 class="py-4 text-center">Editar Mascota</h1>
-    <form id="taskForm_edit" method="post" action="/mascotas/addMascota">
+    <form id="peetForm_edit">
         <div class="mb-3">
             <label class="form-label">Name Peet</label>
-            <input type="text" value="<%= mascota.nombre %> " class="form-control" name="nombre" id="name_edit"
+            <input type="text" value="<%= mascota.nombre %> " class="form-control" id="nombre"
                 placeholder="Name Peet">
         </div>
         <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea name="descripcion" id="description_edit" cols="30" rows="10" placeholder="Peet description "
+            <textarea id="description" cols="30" rows="10" placeholder="Peet description "
                 class="form-control"> <%= mascota.descripcion %> </textarea>
-            <input type="text" value="<%= mascota.id %> " readonly id="idMascota" name="id">
+            <input type="text" value="<%= mascota.id %> " readonly id="idMascota">
         </div>
-        <button type="submit" class="btn btn-primary form-control" data-bs-dismiss="modal">Save changes</button>
+        <button type="submit" class="btn btn-primary form-control">Save changes</button>
 
     </form>
 </div>
 <% } %>
-
-
-
-
 
 
 <%- include('./template/footer.ejs'); -%>

@@ -47,14 +47,12 @@ router.post('/', async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
-    console.log(id);
 
     try {
         // res.render("update");
         const mascota = await Mascota.findOne({
             _id: id
-        });
-        console.log(mascota);
+        });       
 
         res.render("update", {
             mascota,
@@ -90,6 +88,27 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
         console.log("Ha ocurrido un error" + error);
     }
+});
+
+router.put("/:id", async(req, res) => {
+
+    const id = req.params.id;
+    const data = req.body;
+
+    try {
+        const mascotaDB = await Mascota.findByIdAndUpdate(id, data);
+        console.log(mascotaDB);
+        res.send({
+            estado: true,
+            msj: "Se ha actualizado correctamente"
+        });
+    } catch (error) {
+        res.json({
+            estado: false,
+            msj: "No se ha podido actualizar"
+        });
+        console.log(error);
+    }    
 });
 
 
